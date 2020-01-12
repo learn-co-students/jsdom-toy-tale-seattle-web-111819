@@ -40,15 +40,15 @@ fetchToys = () => {
 
 // GET STEP 3
 // Iterate through toys array to get each toy
-// pass on to makeToyCard function to create toy card
+// pass on to makeToyCard function to create a card for each toy
 const showToys = (toyArray) => {
   toyArray.forEach(toy => makeToyCard(toy))
 }
 
 // GET STEP 4
 // create card div to hold toy info
-// append each HTML element to the main card div
-// THIS DISPLAYS on DOM(front-end)
+// append each HTML element to the "card" div
+// THIS DISPLAYS ON DOM(front-end)
 const makeToyCard = (toy) => {
   let div = document.createElement("div")
   div.classList.add("card")
@@ -69,35 +69,35 @@ const makeToyCard = (toy) => {
 
   // PATCH STEP 1
   // add .addEventListener to the Like button
-  likeButton.addEventListener("click", event => {
+  likeButton.addEventListener("click", () => {
     // console.log(event)
     likeToy(toy)
     // pass in each toy
 
-    // PATCH STEP 2
-    // create new div box each time a toy is liked
-    editedLikes = div
+  // PATCH STEP 2
+  // create new div box each time a toy is liked
+  editedLikes = div
 
     })
-      // DELETE STEP 2 
-      // create delete button
-    let deleteButton = document.createElement("button")
-    // deleteButton.setAttribute("delete-btn", delete.id)
-    deleteButton.classList.add("delete-btn")
-    deleteButton.textContent = "Delete"
-    deleteButton.addEventListener("click", event => {
-      deleteToy(toy.id)
-      div.remove();
-      // console.log(event)
+  // DELETE STEP 2 
+  // create delete button
+  let deleteButton = document.createElement("button")
+  // deleteButton.setAttribute("delete-btn", toy.id)
+  deleteButton.classList.add("delete-btn")
+  deleteButton.textContent = "Delete"
+  deleteButton.addEventListener("click", () => {
+    deleteToy(toy.id)
+    div.remove();
+    // console.log(event)
   })
 
-  // add each element to the toyCard div 
+  // add each element to the makeToyCard div 
   div.appendChild(h2)
   div.appendChild(img)
   div.appendChild(p)
 
   // PATCH STEP 3
-  // append like button
+  // append like button to toy div
   div.appendChild(likeButton)
 
   // DELETE STEP 3
@@ -114,8 +114,8 @@ const makeToyCard = (toy) => {
 }
 
 // GET STEP 5
-// select toy-collection container from index.html
-// append toy card to toy-collection div
+// select "toy-collection" div from index.html
+// append toy card to "toy-collection" div
 const appendCard = (card) => {
   let toyCollection = document.getElementById("toy-collection")
   toyCollection.appendChild(card)
