@@ -10,7 +10,7 @@
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 5
+      "likes": 8
     },
     {
       "id": 3,
@@ -47,12 +47,6 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
-    },
-    {
-      "name": "Light Saber",
-      "image": "https://cdn.shopify.com/s/files/1/0012/7215/2136/products/31mH_2BdQWuIL_compact.jpg?v=1578621857",
-      "likes": 1,
-      "id": 32
     }
   ]
 }
