@@ -1,18 +1,8 @@
-let addToy = false
-
-
 // Loaded Chain
-document.addEventListener("DOMContentLoaded", ()=>{
-  const addBtn = document.querySelector('#new-toy-btn')
-  const toyForm = document.querySelector('.container')
-  addBtn.addEventListener('click', () => {
-    // hide & seek with the form
-    addToy = !addToy
-    if (addToy) {toyForm.style.display = 'block'} else {toyForm.style.display = 'none'}
-  })
-  document.getElementById('add-toy-form').onsubmit = e => submitNewForm(e)
-  document.getElementById('edit-confirm').onclick = e => clickEditConfirm(e)
-  document.getElementById('edit-cancel').onclick = e => clickEditCancel(e)
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('new-toy-btn').onclick = e => clickNew(e)
+  document.getElementById('modal-confirm').onclick = e => clickModalConfirm(e)
+  document.getElementById('modal-cancel').onclick = e => clickModalCancel(e)
   window.onclick = e => windowClick(e)
   getAllToys().then(toys => toys.forEach(displayToyCard))
 })
@@ -38,31 +28,22 @@ const deleteToy = id => fetch(`http://localhost:3000/toys/${id}`, {
 
 
 // Events:
+const windowClick = e => {if (e.target == document.getElementById('modal')) {closeModal()}}
+const clickModalCancel = e => closeModal()
+const clickNew = e => addToy()
 const clickLike = e => likeToy(e.target.parentNode.parentNode.id)
-const clickEdit = e => editToy(e)
+const clickEdit = e => editToy(e.target.parentNode.parentNode.id)
 const clickDelete = e => deleteToy(e.target.parentNode.parentNode.id).then(e.target.parentNode.parentNode.remove())
-const submitNewForm = e => {
-  e.preventDefault()
-  postToy({name: e.target.name.value, image: e.target.image.value, likes: 0}).then(displayToyCard)
+const clickModalConfirm = e => {
+  let form = document.getElementById('modal-form')
+  toy = {id: form.toyId.value, name: form.name.value, image: form.image.value}
+  toy.id ? patchToy(toy).then(displayToyCard) : postToy({...toy, likes: 0}).then(displayToyCard)
 }
-const clickEditConfirm = e => {
-  e.preventDefault()
-  let form = e.target.parentNode.parentNode
-  patchToy({id: form.toyId.value, name: form.name.value, image: form.image.value}).then(toy => {
-    displayToyCard(toy)
-    closeModal()
-  })
-}
-const clickEditCancel = e => {
-  e.preventDefault()
-  closeModal()
-}
-const windowClick = e => {if (e.target == document.getElementById('edit-modal')) {closeModal()}}
 
 
 // Helpers:
 const displayToyCard = toy => {
-  document.querySelector('form').reset()
+  closeModal()
   let div = document.createElement('div'),
       h2 = document.createElement('h2'),
       img = document.createElement('img'),
@@ -99,16 +80,21 @@ const likeToy = id => {
     patchToy(toy).then(displayToyCard)
   })
 }
-const editToy = e => {
-  let form = document.getElementById('edit-form')
-  getToy(e.target.parentNode.parentNode.id).then(toy => {
+const addToy = () => {
+  document.getElementById('modal-title').innerText = "Add Toy:"
+  document.getElementById('modal').style.display = "block"
+}
+const editToy = id => {
+  document.getElementById('modal-title').innerText = "Edit Toy:"
+  let form = document.getElementById('modal-form')
+  getToy(id).then(toy => {
     form.toyId.value = toy.id
     form.name.value = toy.name
     form.image.value = toy.image
-    document.getElementById('edit-modal').style.display = "block"
+    document.getElementById('modal').style.display = "block"
   })
 }
 const closeModal = () => {
-  document.getElementById('edit-modal').style.display = "none"
-  document.getElementById('edit-form').reset()
+  document.getElementById('modal').style.display = "none"
+  document.getElementById('modal-form').reset()
 }
