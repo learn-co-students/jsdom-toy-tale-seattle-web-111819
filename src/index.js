@@ -30,6 +30,7 @@ const everyToy = toysArray => {
   })
 }
 
+//card maker
 const makeToyCard = toy => {
   let div = document.createElement('div')
   div.classList.add('card')
@@ -46,15 +47,16 @@ const makeToyCard = toy => {
 
   let button = document.createElement('button')
   button.innerText = "Like <3"
+  //event for PATCH
   button.addEventListener('click', (e) => {
     likeButton(e, toy)
   })
 
   let deleteButton = document.createElement('button')
   deleteButton.innerText = "Delete Toy"
+  //event for DELETE
   deleteButton.addEventListener("click", (e) => {
-    
-    deleteToy(toy, e)
+    deleteToy(toy)
     div.remove()
   })
 
@@ -71,6 +73,7 @@ const makeToyCard = toy => {
   return div
 }
 
+// event for POST
 const newToyClick = () => {
   let newForm = document.getElementById('new-toy-form')
   newForm.addEventListener("submit", e => {
@@ -79,6 +82,7 @@ const newToyClick = () => {
   })
 }
 
+//post
 const newToy = (e) => {
   fetch("http://localhost:3000/toys", {
     method: "POST",
@@ -95,7 +99,7 @@ const newToy = (e) => {
   .then(json => makeToyCard(json))
 }
 
-//post
+//patch
 const likeButton = (e, toy) => {
   fetch(`http://localhost:3000/toys/${toy.id}`, {
     method: "PATCH",
@@ -111,17 +115,13 @@ const likeButton = (e, toy) => {
 }
 
 //delete
-const deleteToy = (toy, e) => {
+const deleteToy = (toy) => {
   fetch(`http://localhost:3000/toys/${toy.id}`, {
     method: "DELETE",
     
   }).then(res => res.json())
-  // .then(json => deletingToy(json))
 }
 
-// const deletingToy = (toy) => {
-//   toy.parentNode.remove()
-// }
 
 
 
