@@ -13,11 +13,9 @@
         alt="toy-header"
       />
     </div>
-
     <div class="container">
-      <form class="add-toy-form">
+      <form id="add-toy-form">
         <h3>Create a toy!</h3>
-
         <input
           type="text"
           name="name"
@@ -45,7 +43,24 @@
     <p style="text-align:center">
       Andy needs your help! <button id="new-toy-btn">Add a new toy!</button>
     </p>
-
     <div id="toy-collection"></div>
+    <div id="edit-modal">
+      <div id="modal-content">
+        <div class="modal-header">
+          <h1>Edit Toy:</h1>
+        </div> 
+        <form id="edit-form">
+          <input type="hidden" name="toyId">
+          <div class="label">Name:</div>
+          <input class="input-text" name="name">
+          <div class="label">Image URL:</div>
+          <input class="input-text" name="image">
+          <div>
+            <button id="edit-confirm">Confirm</button>
+            <button id="edit-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
