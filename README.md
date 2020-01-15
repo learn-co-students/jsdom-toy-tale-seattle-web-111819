@@ -27,10 +27,10 @@ toy-collection `div`.
 
 Each card should have the following child elements:
 
-  * `h2` tag with the toy's name
-  * `img` tag with the `src` of the toy's image attribute and the class name "toy-avatar"
-  * `p` tag with how many likes that toy has
-  * `button` tag with a class "like-btn"
+  <!-- * `h2` tag with the toy's name -->
+  <!-- * `img` tag with the `src` of the toy's image attribute and the class name "toy-avatar" -->
+  <!-- * `p` tag with how many likes that toy has -->
+  <!-- * `button` tag with a class "like-btn" -->
 
 After all of that, the toy card should resemble:
 
@@ -46,7 +46,9 @@ After all of that, the toy card should resemble:
 ## Add a New Toy
 
 * When a user clicks on the add new toy button, a `POST` request is sent to `http://localhost:3000/toys` and the new toy is added to Andy's Toy Collection.
+
 * The toy should conditionally render to the page.
+
 * In order to send a POST request via Fetch, give the Fetch a second argument of an object. This object should specify the method as `POST` and also provide the appropriate headers and the JSON-ified data for the request. If your request isn't working, make sure your header and keys match the documentation.
 
 ```
